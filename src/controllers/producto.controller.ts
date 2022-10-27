@@ -1,3 +1,5 @@
+
+import { authenticate } from '@loopback/authentication';
 import {
   Count,
   CountSchema,
@@ -19,13 +21,14 @@ import {
 } from '@loopback/rest';
 import {Producto} from '../models';
 import {ProductoRepository} from '../repositories';
-
+@authenticate("admin")
 export class ProductoController {
   constructor(
     @repository(ProductoRepository)
     public productoRepository : ProductoRepository,
   ) {}
-
+  
+  
   @post('/productos')
   @response(200, {
     description: 'Producto model instance',
